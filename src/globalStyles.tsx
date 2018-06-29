@@ -41,24 +41,4 @@ injectGlobal`
     max-height: 100%;
     -webkit-overflow-scrolling: touch;
   }
-
-  a {
-    color: currentColor;
-    text-decoration: none;
-  }
-
-  a:hover {
-    cursor: pointer;
-  }
-
-  textarea {
-    resize: none;
-  }
-
-  #root {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-  }
 `;
