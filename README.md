@@ -13,6 +13,14 @@
 3.  yarn install
 4.  yarn start
 
+## TODO:
+
+- Add loading indicator
+- Better error message on network fail
+- Progressive Web App Installer
+- Unit test actions - handlers
+- UI/UX improvement
+
 ### Important Note
 
 Please open on chrome desktop since other browser vendors doesn not support webp file provided by GIPHY api
