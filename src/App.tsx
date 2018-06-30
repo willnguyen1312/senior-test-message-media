@@ -124,7 +124,11 @@ class App extends React.Component<{}, IAppState> {
         </PaginationWrapper>
 
         <Buttons handleChangeNumImg={this.handleChangeNumImg} count={limit} />
-        <Gallery onImageClick={this.onImageClick} images={images} />
+        {images ? (
+          <Gallery onImageClick={this.onImageClick} images={images} />
+        ) : (
+          <span>No image</span>
+        )}
       </React.Fragment>
     );
   }
