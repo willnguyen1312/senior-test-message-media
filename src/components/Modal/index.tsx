@@ -22,6 +22,7 @@ const Img = styled.img`
   @media (min-width: 48rem) {
     width: 60vw;
     height: auto;
+    min-height: 480px;
   }
 
   @keyframes zoom {
