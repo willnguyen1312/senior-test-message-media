@@ -130,7 +130,7 @@ class App extends React.Component<{}, IAppState> {
                 breakLabel={<span>...</span>}
                 pageCount={pageCount}
                 marginPagesDisplayed={2}
-                pageRangeDisplayed={5}
+                pageRangeDisplayed={3}
                 onPageChange={this.handlePageClick}
                 containerClassName={"pagination"}
                 activeClassName={"active"}
