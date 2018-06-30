@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
   -webkit-overflow-scrolling: touch;
 `;
 
-export const Footer = styled.div`
+export const Footer = styled.footer`
   max-width: 100vw;
   grid-row: 2 / 3;
 `;

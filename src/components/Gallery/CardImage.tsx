@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import { handleClickCallbackFunction } from ".";
 
-const CardWrapper = styled.div`
+const CardWrapper = styled.article`
   width: 100%;
   display: flex;
   flex-direction: column;

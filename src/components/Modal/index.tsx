@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 
-const ModalWrapper = styled.div`
+const ModalWrapper = styled.article`
   position: fixed;
   top: 0;
   right: 0;

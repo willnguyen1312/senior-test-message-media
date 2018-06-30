@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import CardImage from "./CardImage";
 
-const GalleryWrapper = styled.div`
+const GalleryWrapper = styled.section`
   display: grid;
   grid-row-gap: 50px;
   grid-template-columns: 45vw 45vw;
