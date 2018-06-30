@@ -6,8 +6,8 @@ export const Header = styled.header`
   display: flex;
   justify-content: center;
 
-  &:hover {
-    span {
+  span {
+    &:hover {
       background-color: #26697e;
     }
   }

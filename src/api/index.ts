@@ -9,7 +9,7 @@ export const getImageGallery = async ({
   count: number;
   offset: number;
 }) => {
-  const url = `${api}count=${count}&offset=${offset}`;
+  const url = `${api}limit=${count}&offset=${offset}`;
   const data = await fetch(url).then(res => {
     if (res.ok) {
       return res.json();

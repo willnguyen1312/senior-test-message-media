@@ -3,10 +3,15 @@ import * as React from "react";
 import { getImageGallery } from "./api";
 import { H1, Header } from "./AppStyles";
 import { A } from "./common/A";
+import Buttons from "./components/Buttons";
 import Gallery from "./components/Gallery";
 
 interface IAppState {
   images: any[];
+  count: number;
+  error: boolean;
+  loading: boolean;
+  offset: number;
 }
 
 class App extends React.Component<{}, IAppState> {
@@ -18,7 +23,13 @@ class App extends React.Component<{}, IAppState> {
     offset: 0
   };
 
-  async componentDidMount() {
+  handleChangeNumImg = (numOfImg: number) => {
+    this.setState({
+      count: numOfImg
+    });
+  };
+
+  loadImage = async () => {
     try {
       const { count, offset } = this.state;
       const option = {
@@ -32,10 +43,20 @@ class App extends React.Component<{}, IAppState> {
     } catch (error) {
       alert(error);
     }
+  };
+
+  componentDidMount() {
+    this.loadImage();
+  }
+
+  componentDidUpdate(_: any, previousState: IAppState) {
+    if (this.state.count !== previousState.count) {
+      this.loadImage();
+    }
   }
 
   public render() {
-    const { images } = this.state;
+    const { count, images } = this.state;
     return (
       <React.Fragment>
         <Header>
@@ -43,6 +64,7 @@ class App extends React.Component<{}, IAppState> {
             <H1>MessageMedia Senior Test</H1>
           </A>
         </Header>
+        <Buttons handleChangeNumImg={this.handleChangeNumImg} count={count} />
         <Gallery images={images} />
       </React.Fragment>
     );

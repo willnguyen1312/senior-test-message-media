@@ -6,6 +6,7 @@
       "node_modules/**/*.ts"
     ]
   },
+  "defaultSeverity": "warn",
   "rules": {
     "member-access": false
   }
