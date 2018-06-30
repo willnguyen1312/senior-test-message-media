@@ -6,7 +6,9 @@ import { render } from "react-dom";
 import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
 
-render(<App />, document.getElementById("root") as HTMLElement);
+const rootElement = document.getElementById("root") as HTMLElement;
+
+render(<App />, rootElement);
 
 if (module.hot) {
   module.hot.accept();

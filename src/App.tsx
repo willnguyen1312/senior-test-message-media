@@ -4,6 +4,8 @@ import * as ReactPaginate from "react-paginate";
 import { getImageGallery } from "./api";
 import { H1, Header, PaginationWrapper } from "./AppStyles";
 import { A } from "./common/A";
+import Banner from "./common/Banner";
+import { Footer, Wrapper } from "./common/Position";
 import Buttons from "./components/Buttons";
 import Gallery from "./components/Gallery";
 import Modal from "./components/Modal";
@@ -98,38 +100,44 @@ class App extends React.Component<{}, IAppState> {
   public render() {
     const { limit, images, pageCount, modalOpen, modalSrc } = this.state;
     return (
-      <React.Fragment>
-        {modalOpen ? (
-          <Modal closeModal={this.closeModal} src={modalSrc} />
-        ) : null}
-        <Header>
-          <A href="https://github.com/willnguyen1312/senior-test-message-media">
-            <H1>MessageMedia Senior Test</H1>
-          </A>
-        </Header>
-        <PaginationWrapper>
-          {pageCount ? (
-            <ReactPaginate
-              previousLabel={"previous"}
-              nextLabel={"next"}
-              breakLabel={<span>...</span>}
-              pageCount={pageCount}
-              marginPagesDisplayed={2}
-              pageRangeDisplayed={5}
-              onPageChange={this.handlePageClick}
-              containerClassName={"pagination"}
-              activeClassName={"active"}
-            />
+      <Wrapper>
+        <div>
+          {modalOpen ? (
+            <Modal closeModal={this.closeModal} src={modalSrc} />
           ) : null}
-        </PaginationWrapper>
+          <Header>
+            <A href="https://github.com/willnguyen1312/senior-test-message-media">
+              <H1>MessageMedia Senior Test</H1>
+            </A>
+          </Header>
+          <PaginationWrapper>
+            {pageCount ? (
+              <ReactPaginate
+                previousLabel={"previous"}
+                nextLabel={"next"}
+                breakLabel={<span>...</span>}
+                pageCount={pageCount}
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={5}
+                onPageChange={this.handlePageClick}
+                containerClassName={"pagination"}
+                activeClassName={"active"}
+              />
+            ) : null}
+          </PaginationWrapper>
 
-        <Buttons handleChangeNumImg={this.handleChangeNumImg} count={limit} />
-        {images ? (
-          <Gallery onImageClick={this.onImageClick} images={images} />
-        ) : (
-          <span>No image</span>
-        )}
-      </React.Fragment>
+          <Buttons handleChangeNumImg={this.handleChangeNumImg} count={limit} />
+          {images.length ? (
+            <Gallery onImageClick={this.onImageClick} images={images} />
+          ) : (
+            <span>No image</span>
+          )}
+        </div>
+
+        <Footer>
+          <Banner />
+        </Footer>
+      </Wrapper>
     );
   }
 }

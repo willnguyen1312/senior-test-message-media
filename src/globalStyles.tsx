@@ -42,6 +42,10 @@ injectGlobal`
     -webkit-overflow-scrolling: touch;
   }
 
+  #root {
+    width: 100vw;
+  }
+
   .pagination {
     display: flex;
     justify-content: space-around;
