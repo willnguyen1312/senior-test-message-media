@@ -17,6 +17,7 @@ interface IAppState {
   totalCount: number;
   pageCount: number;
   loading: boolean;
+  doneFirstLoad: boolean;
   offset: number;
   modalOpen: boolean;
   modalSrc: string;
@@ -24,6 +25,7 @@ interface IAppState {
 
 class App extends React.Component<{}, IAppState> {
   state = {
+    doneFirstLoad: false,
     error: false,
     images: [],
     limit: 20,
@@ -66,8 +68,11 @@ class App extends React.Component<{}, IAppState> {
     }
   };
 
-  componentDidMount() {
-    this.loadImage();
+  async componentDidMount() {
+    await this.loadImage();
+    this.setState({
+      doneFirstLoad: true
+    });
   }
 
   onImageClick = (image: string) => {
@@ -98,7 +103,14 @@ class App extends React.Component<{}, IAppState> {
   }
 
   public render() {
-    const { limit, images, pageCount, modalOpen, modalSrc } = this.state;
+    const {
+      limit,
+      images,
+      pageCount,
+      modalOpen,
+      modalSrc,
+      doneFirstLoad
+    } = this.state;
     return (
       <Wrapper>
         <div>
@@ -127,11 +139,13 @@ class App extends React.Component<{}, IAppState> {
           </PaginationWrapper>
 
           <Buttons handleChangeNumImg={this.handleChangeNumImg} count={limit} />
-          {images.length ? (
-            <Gallery onImageClick={this.onImageClick} images={images} />
-          ) : (
-            <span>No image</span>
-          )}
+          {doneFirstLoad ? (
+            images.length ? (
+              <Gallery onImageClick={this.onImageClick} images={images} />
+            ) : (
+              <span>No image</span>
+            )
+          ) : null}
         </div>
 
         <Footer>
