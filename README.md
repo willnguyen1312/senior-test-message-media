@@ -12,3 +12,7 @@
 2.  cd senior-test-message-media
 3.  yarn install
 4.  yarn start
+
+### Important Note
+
+Please open on chrome desktop since other browser vendors doesn not support webp file provided by GIPHY api

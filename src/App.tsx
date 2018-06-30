@@ -2,6 +2,7 @@ import * as React from "react";
 
 import { getImageGallery } from "./api";
 import { H1, Header } from "./AppStyles";
+import { A } from "./common/A";
 import Gallery from "./components/Gallery";
 
 interface IAppState {
@@ -25,7 +26,6 @@ class App extends React.Component<{}, IAppState> {
         offset
       };
       const { data: images } = await getImageGallery(option);
-      // tslint:disable-next-line:no-console
       this.setState({
         images
       });
@@ -39,7 +39,9 @@ class App extends React.Component<{}, IAppState> {
     return (
       <React.Fragment>
         <Header>
-          <H1>MessageMedia Senior Test</H1>
+          <A href="https://github.com/willnguyen1312/senior-test-message-media">
+            <H1>MessageMedia Senior Test</H1>
+          </A>
         </Header>
         <Gallery images={images} />
       </React.Fragment>
