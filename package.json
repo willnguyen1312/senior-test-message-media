@@ -1,7 +1,6 @@
 {
   "name": "nam-message-media-senior-test",
   "version": "0.1.0",
-  "private": true,
   "dependencies": {
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
@@ -23,5 +22,6 @@
     "@types/react-paginate": "^4.3.2",
     "@types/webpack-env": "^1.13.6",
     "typescript": "^2.9.2"
-  }
+  },
+  "license": "MIT"
 }
