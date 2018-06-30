@@ -1,5 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
+import { handleClickCallbackFunction } from ".";
 
 const CardWrapper = styled.div`
   width: 100%;
@@ -39,6 +40,7 @@ interface ICardImageProps {
   title: string;
   userAvatarUrl: string;
   userName: string;
+  onClick: handleClickCallbackFunction;
 }
 
 const CardImage: React.SFC<ICardImageProps> = ({
@@ -46,11 +48,12 @@ const CardImage: React.SFC<ICardImageProps> = ({
   userAvatarUrl,
   userName,
   title,
-  altName
+  altName,
+  onClick
 }) => {
   return (
     <CardWrapper>
-      <Img src={src} alt={title} />
+      <Img onClick={onClick} src={src} alt={title} />
       <ImageCaption>
         <UserAvatar alt={altName} src={userAvatarUrl} />
         <Text>{userName}</Text>

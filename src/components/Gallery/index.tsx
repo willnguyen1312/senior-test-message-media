@@ -20,11 +20,23 @@ const GalleryWrapper = styled.div`
   }
 `;
 
+export type handleClickCallbackFunction = (image: any) => void;
+
 interface IGalleryProps {
   images: any[];
+  onImageClick: handleClickCallbackFunction;
 }
 
-const Gallery: React.SFC<IGalleryProps> = ({ images }) => {
+const handleImageClick = (
+  onClickFunc: handleClickCallbackFunction,
+  image: any
+) => {
+  return () => {
+    onClickFunc(image);
+  };
+};
+
+const Gallery: React.SFC<IGalleryProps> = ({ images, onImageClick }) => {
   return (
     <GalleryWrapper>
       {images.map(imageData => {
@@ -46,6 +58,7 @@ const Gallery: React.SFC<IGalleryProps> = ({ images }) => {
         } = imageData;
         return (
           <CardImage
+            onClick={handleImageClick(onImageClick, src)}
             key={id}
             src={src}
             title={title}

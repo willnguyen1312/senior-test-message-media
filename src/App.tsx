@@ -6,6 +6,7 @@ import { H1, Header, PaginationWrapper } from "./AppStyles";
 import { A } from "./common/A";
 import Buttons from "./components/Buttons";
 import Gallery from "./components/Gallery";
+import Modal from "./components/Modal";
 
 interface IAppState {
   images: any[];
@@ -15,6 +16,8 @@ interface IAppState {
   pageCount: number;
   loading: boolean;
   offset: number;
+  modalOpen: boolean;
+  modalSrc: string;
 }
 
 class App extends React.Component<{}, IAppState> {
@@ -23,6 +26,8 @@ class App extends React.Component<{}, IAppState> {
     images: [],
     limit: 20,
     loading: false,
+    modalOpen: false,
+    modalSrc: "",
     offset: 0,
     pageCount: 0,
     totalCount: 0
@@ -63,11 +68,18 @@ class App extends React.Component<{}, IAppState> {
     this.loadImage();
   }
 
-  componentDidUpdate(_: any, previousState: IAppState) {
-    if (this.state.limit !== previousState.limit) {
-      this.loadImage();
-    }
-  }
+  onImageClick = (image: string) => {
+    this.setState({
+      modalOpen: true,
+      modalSrc: image
+    });
+  };
+
+  closeModal = () => {
+    this.setState({
+      modalOpen: false
+    });
+  };
 
   handlePageClick = ({ selected }: { selected: number }) => {
     const offset = Math.ceil(selected * this.state.limit);
@@ -77,10 +89,19 @@ class App extends React.Component<{}, IAppState> {
     });
   };
 
+  componentDidUpdate(_: any, previousState: IAppState) {
+    if (this.state.limit !== previousState.limit) {
+      this.loadImage();
+    }
+  }
+
   public render() {
-    const { limit, images, pageCount } = this.state;
+    const { limit, images, pageCount, modalOpen, modalSrc } = this.state;
     return (
       <React.Fragment>
+        {modalOpen ? (
+          <Modal closeModal={this.closeModal} src={modalSrc} />
+        ) : null}
         <Header>
           <A href="https://github.com/willnguyen1312/senior-test-message-media">
             <H1>MessageMedia Senior Test</H1>
@@ -103,7 +124,7 @@ class App extends React.Component<{}, IAppState> {
         </PaginationWrapper>
 
         <Buttons handleChangeNumImg={this.handleChangeNumImg} count={limit} />
-        <Gallery images={images} />
+        <Gallery onImageClick={this.onImageClick} images={images} />
       </React.Fragment>
     );
   }

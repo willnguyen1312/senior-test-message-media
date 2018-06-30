@@ -19,15 +19,14 @@ const Button = styled.button.attrs({
   margin-bottom: 1rem;
 `;
 
+type handleChangeCallbackFunction = (num: number) => void;
+
 interface IButtonsProps {
   count: number;
-  // tslint:disable-next-line:ban-types
-  handleChangeNumImg: Function;
+  handleChangeNumImg: handleChangeCallbackFunction;
 }
 
 const listNums = [10, 20, 30];
-
-type handleChangeCallbackFunction = (num: number) => void;
 
 const handleChangeOnButtonClicked = (
   handleChangeNumImg: handleChangeCallbackFunction,
