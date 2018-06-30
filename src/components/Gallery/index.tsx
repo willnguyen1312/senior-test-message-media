@@ -38,6 +38,10 @@ const Gallery: React.SFC<IGalleryProps> = ({ images }) => {
             avatar_url: userAvatarUrl = "https://picsum.photos/20/20",
             display_name: userName = "Anonymous",
             userName: altName = "anonymous"
+          } = {
+            avatar_url: "https://picsum.photos/20/20",
+            display_name: "Anonymous",
+            userName: "anonymous"
           }
         } = imageData;
         return (

@@ -1,44 +1,58 @@
 import * as React from "react";
+import * as ReactPaginate from "react-paginate";
 
 import { getImageGallery } from "./api";
-import { H1, Header } from "./AppStyles";
+import { H1, Header, PaginationWrapper } from "./AppStyles";
 import { A } from "./common/A";
 import Buttons from "./components/Buttons";
 import Gallery from "./components/Gallery";
 
 interface IAppState {
   images: any[];
-  count: number;
+  limit: number;
   error: boolean;
+  totalCount: number;
+  pageCount: number;
   loading: boolean;
   offset: number;
 }
 
 class App extends React.Component<{}, IAppState> {
   state = {
-    count: 20,
     error: false,
     images: [],
+    limit: 20,
     loading: false,
-    offset: 0
+    offset: 0,
+    pageCount: 0,
+    totalCount: 0
   };
 
   handleChangeNumImg = (numOfImg: number) => {
     this.setState({
-      count: numOfImg
+      limit: numOfImg
     });
   };
 
   loadImage = async () => {
     try {
-      const { count, offset } = this.state;
+      const { limit, offset } = this.state;
       const option = {
-        count,
+        limit,
         offset
       };
-      const { data: images } = await getImageGallery(option);
+      const {
+        data: images,
+        pagination: { total_count: total }
+      } = await getImageGallery(option);
+
+      const totalCount = this.state.totalCount || total;
+
+      const pageCount = Math.ceil(totalCount / limit);
       this.setState({
-        images
+        images,
+        pageCount,
+        totalCount
       });
     } catch (error) {
       alert(error);
@@ -50,13 +64,21 @@ class App extends React.Component<{}, IAppState> {
   }
 
   componentDidUpdate(_: any, previousState: IAppState) {
-    if (this.state.count !== previousState.count) {
+    if (this.state.limit !== previousState.limit) {
       this.loadImage();
     }
   }
 
+  handlePageClick = ({ selected }: { selected: number }) => {
+    const offset = Math.ceil(selected * this.state.limit);
+
+    this.setState({ offset }, () => {
+      this.loadImage();
+    });
+  };
+
   public render() {
-    const { count, images } = this.state;
+    const { limit, images, pageCount } = this.state;
     return (
       <React.Fragment>
         <Header>
@@ -64,7 +86,21 @@ class App extends React.Component<{}, IAppState> {
             <H1>MessageMedia Senior Test</H1>
           </A>
         </Header>
-        <Buttons handleChangeNumImg={this.handleChangeNumImg} count={count} />
+        <PaginationWrapper>
+          <ReactPaginate
+            previousLabel={"previous"}
+            nextLabel={"next"}
+            breakLabel={<span>...</span>}
+            pageCount={pageCount}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={5}
+            onPageChange={this.handlePageClick}
+            containerClassName={"pagination"}
+            activeClassName={"active"}
+          />
+        </PaginationWrapper>
+
+        <Buttons handleChangeNumImg={this.handleChangeNumImg} count={limit} />
         <Gallery images={images} />
       </React.Fragment>
     );

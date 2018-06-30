@@ -41,4 +41,31 @@ injectGlobal`
     max-height: 100%;
     -webkit-overflow-scrolling: touch;
   }
+
+  .pagination {
+    display: flex;
+    justify-content: space-around;
+    width: 100vw;
+    max-width: 600px;
+
+    li {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      cursor: pointer;
+    }
+
+    .active {
+      padding-left: 10px;
+      padding-right: 10px;
+      background-color: #FACD00;
+    }
+
+    .previous, .next {
+      padding-left: 10px;
+      padding-right: 10px;
+      text-transform: capitalize;
+      background-color: #26697e;
+    }
+  }
 `;

@@ -23,3 +23,9 @@ export const H1 = styled.span`
     font-size: 2rem;
   }
 `;
+
+export const PaginationWrapper = styled.div`
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+`;
