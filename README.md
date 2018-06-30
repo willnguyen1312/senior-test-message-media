@@ -23,4 +23,4 @@
 
 ### Important Note
 
-Please open on chrome desktop since other browser vendors doesn not support webp file provided by GIPHY api
+Please open on chrome desktop since other browser vendors does not support webp file provided by GIPHY api
