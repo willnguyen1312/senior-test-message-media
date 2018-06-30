@@ -16,10 +16,21 @@ const ModalWrapper = styled.div`
 const Img = styled.img`
   width: 80vw;
   height: 300px;
+  animation-name: zoom;
+  animation-duration: 0.6s;
 
   @media (min-width: 48rem) {
     width: 60vw;
     height: auto;
+  }
+
+  @keyframes zoom {
+    from {
+      transform: scale(0);
+    }
+    to {
+      transform: scale(1);
+    }
   }
 `;
 
